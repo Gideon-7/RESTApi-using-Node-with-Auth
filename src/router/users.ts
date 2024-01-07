@@ -1,8 +1,10 @@
 import express from 'express';
 
-import { getAllUsers } from '../controllers/users';
+import { deleteUser, getAllUsers } from '../controllers/users';
+import { isAuthenticated } from '../middlewares';
 import router from 'router';
 
 export default (router: express.Router) => {
-    router.get('/users', getAllUsers);
+    router.get('/users', isAuthenticated, getAllUsers);
+    router.delete('/users/:id', deleteUser);
 };
